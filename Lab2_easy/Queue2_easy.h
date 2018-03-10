@@ -11,14 +11,17 @@ class Queue
 	size_t size_;
 	int head;
 	int tail;
+	int n;
 
 public:
 
 	Queue(size_t = 100);
 
+	Queue(const Queue&);
+
 	~Queue();
 
-	int* add(int);
+	int* add(const int&);
 
 	void remove();
 

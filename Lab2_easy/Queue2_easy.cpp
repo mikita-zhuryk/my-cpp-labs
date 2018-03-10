@@ -8,8 +8,20 @@ Queue::Queue(size_t size_)
 	this->size_ = (size_ < MAX_SIZE) ? MAX_SIZE : size_;
 	queue_ = new int[size_];
 	if (queue_ == nullptr) { throw 5; }
-	head = 0;
-	tail = 1;
+	head = -1;
+	tail = 0;
+	n = 0;
+}
+
+Queue::Queue(const Queue& q) {
+	size_ = q.size_;
+	queue_ = new int[size_];
+	for (int i = 0; i < size_; i++) {
+		queue_[i] = q.queue_[i];
+	}
+	head = q.head;
+	tail = q.tail;
+	n = q.n;
 }
 
 Queue::~Queue()
@@ -19,9 +31,11 @@ Queue::~Queue()
 	}
 }
 
-int* Queue::add(int data) {
-	if (++tail > size_) { throw OutOfBounds(); }
+int* Queue::add(const int& data) {
+	if (++tail >= size_) { throw OutOfBounds(); }
 	queue_[tail] = data;
+	if (n == 0) { head = tail; }
+	n++;
 	return queue_ + tail;
 }
 
