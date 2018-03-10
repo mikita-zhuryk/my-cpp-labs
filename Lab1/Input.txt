@@ -1,0 +1,7 @@
+Ofcourse 7 10.0
+Rg 4 2.3
+Ng 4 6.5
+Rough 4 7.5
+K 7 1.3
+Donkey 4 3.2
+Rog 7 5.4
