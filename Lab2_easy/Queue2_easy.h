@@ -8,14 +8,14 @@ struct OutOfBounds {};
 class Queue
 {
 	int* queue_;
-	size_t size_;
+	int size_;
 	int head;
 	int tail;
 	int n;
 
 public:
 
-	Queue(size_t = 100);
+	Queue(int = 100);
 
 	Queue(const Queue&);
 
@@ -25,9 +25,9 @@ public:
 
 	void remove();
 
-	int* addToPos(int, size_t);
+	int* addToPos(int, int);
 
-	size_t removeFromPos(size_t);
+	int removeFromPos(int);
 
 	bool operator==(const Queue&);
 
