@@ -3,12 +3,12 @@
 
 #define MAX_SIZE 100
 
-Queue::Queue(size_t size_)
+Queue::Queue(int size_)
 {
 	this->size_ = (size_ < MAX_SIZE) ? MAX_SIZE : size_;
 	queue_ = new int[size_];
 	if (queue_ == nullptr) { throw 5; }
-	head = -1;
+	head = 0;
 	tail = 0;
 	n = 0;
 }
@@ -43,12 +43,12 @@ void Queue::remove() {
 	head++;
 }
 
-int* Queue::addToPos(int data, size_t position)
+int* Queue::addToPos(int data, int position)
 {
 	if ((position < 0) || (position > tail - head - 1)) { throw 1; }
 	position--;
 	tail++;
-	for (size_t i = tail; i > position; i--)
+	for (int i = tail; i > position; i--)
 	{
 		queue_[i] = queue_[i - 1];
 	}
@@ -57,11 +57,11 @@ int* Queue::addToPos(int data, size_t position)
 }
 
 
-size_t Queue::removeFromPos(size_t position)
+int Queue::removeFromPos(int position)
 {
 	if ((position < 0) || (position > tail - head - 1)) { throw 1; }
 	position--;
-	for (size_t i = position; i < tail - 1; i++)
+	for (int i = position; i < tail - 1; i++)
 	{
 		queue_[i] = queue_[i + 1];
 	}
@@ -73,7 +73,7 @@ size_t Queue::removeFromPos(size_t position)
 bool Queue::operator==(const Queue& cmpObj)
 {
 	if (size_ != cmpObj.size_) { return false; }
-	for (size_t i = head; i < tail; i++)
+	for (int i = head; i < tail; i++)
 	{
 		if (queue_[i] != cmpObj.queue_[i]) { return false; }
 	}
@@ -86,11 +86,10 @@ bool Queue::operator!=(const Queue& cmpObj)
 	return !(*this == cmpObj);
 }
 
-
 ostream& operator<<(ostream& outStream, const Queue& obj)
 {
 	if (!outStream) { throw 2; }
-	for (size_t i = obj.head; i < obj.tail; i++)
+	for (int i = obj.head; i < obj.tail; i++)
 	{
 		outStream << obj.queue_[i] << ' ';
 	}
@@ -101,10 +100,13 @@ istream& operator>>(istream& inStream, Queue& obj)
 {
 	if (!inStream) { throw 3; }
 	if (inStream.eof()) { throw 4; }
-	int temp;
-	for (size_t i = obj.head; i < obj.tail; i++)
+	int num = 0;
+	cout << "Input number of elements.\n";
+	cin >> num;
+	obj.tail += num;
+	for (int i = obj.head; i < obj.tail; i++)
 	{
-		inStream >> temp;
+		inStream >> obj.queue_[i];
 	}
 	return inStream;
 }

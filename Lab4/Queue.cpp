@@ -86,9 +86,15 @@ void Queue::addElem(const char* street, int house, int building, int flat) {
 }
 
 Queue::QueueNode Queue::popElem() {
-	QueueNode tmp(*head);
-	QueueNode* tmpPtr = head;
-	head = head->nextNode;
-	delete tmpPtr;
-	return tmp;
+	if (isEmpty()) { 
+		cout << "Queue is empty.\n";
+		return QueueNode("\0", 0, 0, 0, 0, 0);
+	}
+	else {
+		QueueNode tmp(*head);
+		QueueNode* tmpPtr = head;
+		head = head->nextNode;
+		delete tmpPtr;
+		return tmp;
+	}
 }

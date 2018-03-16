@@ -17,7 +17,7 @@ int main()
 		cout << "Input queue length.\n";
 		cin >> length;
 		Queue q(length);
-		cout << "Input queue elements.\n";
+		//cout << "Input queue elements.\n";
 		cin >> q;
 		cin.clear();
 		state(q);
