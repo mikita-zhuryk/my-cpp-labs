@@ -18,6 +18,9 @@ class Queue {
 
 		~QueueNode();
 
+		/*friend ostream& operator<<(ostream& out, const QueueNode& obj) {
+			out << obj.street << ", " << obj.house << ", " << obj.building << ", " << obj.flat << ".\n";
+		}*/
 	};
 
 	QueueNode* head;

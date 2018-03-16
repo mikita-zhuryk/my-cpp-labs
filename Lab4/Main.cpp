@@ -36,6 +36,7 @@ int menu()
 			break;
 		}
 		case 3: {
+			//cout << "Deleted: " << 
 			q.popElem();
 			break;
 		}
