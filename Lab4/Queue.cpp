@@ -4,6 +4,11 @@
 
 using namespace std;
 
+Queue::Queue() {
+	head = nullptr;
+	tail = nullptr;
+}
+
 Queue::Queue(const char* str, int house, int building, int flat) {
 	head = new QueueNode(str, house, building, flat);
 	tail = head;
@@ -53,7 +58,7 @@ Queue::QueueNode::~QueueNode() {
 }
 
 bool Queue::isEmpty() {
-	return (!(_strcmpi(head->street, "\0") | head->house | head->building | head->flat | (int)head->prevNode | (int)head->nextNode));
+	return (!head);
 }
 
 void Queue::showState() {
@@ -73,10 +78,8 @@ void Queue::showState() {
 
 void Queue::addElem(const char* street, int house, int building, int flat) {
 	if (isEmpty()) {
-		strcpy_s(head->street, STRING_SIZE, street);
-		head->house = house;
-		head->building = building;
-		head->flat = flat;
+		head = new QueueNode(street, house, building, flat, tail);
+		tail = head;
 	}
 	else {
 		QueueNode* tmp = tail;
@@ -87,7 +90,7 @@ void Queue::addElem(const char* street, int house, int building, int flat) {
 
 Queue::QueueNode Queue::popElem() {
 	if (isEmpty()) { 
-		cout << "Queue is empty.\n";
+		cout << "Error. Queue is empty, nothing to delete.\n";
 		return QueueNode("\0", 0, 0, 0, 0, 0);
 	}
 	else {

@@ -79,7 +79,6 @@ size_t* findByDiagnosis(Patient* patArray, size_t n, char* diagnosis)
 		{
 			indexArr[i] = 1;
 		}
-		//delete[] curDiag;
 	}
 	return indexArr;
 }
@@ -119,36 +118,40 @@ int main()
 		cin.ignore(1);
 		cin.getline(diagnosis, 30);
 		foundDiag = findByDiagnosis(patArray, n, diagnosis);
+		bool found = false;
 		for (size_t i = 0; i < n; i++)
 		{
 			if (foundDiag[i])
 			{
+				found = true;
 				cout << patArray[i] << endl;
 				cout << endl;
 			}
+		}
+		if (!found) {
+			cout << "Patients with this diagnosis were not found.\n";
 		}
 		cout << "Enter lower and then higher border.\n";
 		int lower = 0;
 		int higher = 0;
 		cin >> lower >> higher;
 		foundNumber = findByNo(patArray, n, lower, higher);
+		found = false;
 		for (size_t i = 0; i < n; i++)
 		{
 			if (foundNumber[i])
 			{
+				found = true;
 				cout << patArray[i] << endl;
 				cout << endl;
 			}
 		}
-		delete[] patArray;
-		delete[] foundDiag;
-		delete[] foundNumber;
+		if (!found) {
+			cout << "Patients with these card numbers were not found.\n";
+		}
 	}
 	catch (int errCode)
 	{
-		delete[] patArray;
-		delete[] foundDiag;
-		delete[] foundNumber;
 		switch(errCode)
 		{
 		case 1:
@@ -182,6 +185,9 @@ int main()
 			}
 		}
 	}
+	delete[] patArray;
+	delete[] foundDiag;
+	delete[] foundNumber;
 	std::system("pause");
 	return 0;
 }

@@ -7,7 +7,7 @@ struct incorrect_input {};
 
 int menu()
 {
-	Queue q;
+	Queue q;						//TODO: Add Elem->Delete Elem->Show State->CRASH
 	bool loop = true;
 	int option = -1;
 	while (loop) {

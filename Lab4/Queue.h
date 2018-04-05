@@ -29,7 +29,11 @@ class Queue {
 
 public:
 
-	Queue(const char* = "\0", int = 0, int = 0, int = 0);
+	Queue();
+
+	//Queue(const char* = "\0", int = 0, int = 0, int = 0);
+
+	Queue(const char*, int, int, int);
 
 	Queue(const Queue&);
 
