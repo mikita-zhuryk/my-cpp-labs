@@ -1,18 +1,32 @@
 #pragma once
 
+//TODO: Add struct House containing street, house, ...
+
 #define STRING_SIZE 30
+
+struct Address {
+	char* street;
+	int house;
+	int building;
+	int flat;
+
+	Address();
+
+	Address(const char*, int, int, int);
+
+	Address(const Address&);
+
+	~Address();
+};
 
 class Queue {
 
 	struct QueueNode {
-		char* street;
-		int house;
-		int building;
-		int flat;
+		Address address;
 		QueueNode* prevNode;
 		QueueNode* nextNode;
 
-		QueueNode(const char* = "\0", int = 0, int = 0, int = 0, QueueNode* = nullptr, QueueNode* = nullptr);
+		QueueNode(Address, QueueNode* = nullptr, QueueNode* = nullptr);
 
 		QueueNode(const QueueNode&);
 
@@ -33,7 +47,7 @@ public:
 
 	//Queue(const char* = "\0", int = 0, int = 0, int = 0);
 
-	Queue(const char*, int, int, int);
+	Queue(Address);
 
 	Queue(const Queue&);
 
@@ -43,7 +57,7 @@ public:
 
 	void showState();
 
-	void addElem(const char*, int, int, int);
+	void addElem(Address);
 
 	QueueNode popElem();
 

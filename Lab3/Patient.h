@@ -23,17 +23,17 @@ public:
 
 	~Patient();
 
-	void setSurname(const char* = "\0");
+	void setSurname(const char*);
 
-	void setForename(const char* = "\0");
+	void setForename(const char*);
 
-	void setMiddleName(const char* = "\0");
+	void setMiddleName(const char*);
 
-	void setAddress(const char* = "\0");
+	void setAddress(const char*);
 
-	void setCardNo(int = 0);
+	void setCardNo(int);
 
-	void setDiagnosis(const char* = "\0");
+	void setDiagnosis(const char*);
 
 	char* getSurname();
 

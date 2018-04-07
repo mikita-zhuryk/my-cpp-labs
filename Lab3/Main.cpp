@@ -1,6 +1,9 @@
 #include "Patient.h"
 #include <iostream>
 #include <fstream>
+#define PATIENT_STRINGS_AMOUNT 6
+
+//TODO: Rework exceptions system
 
 using namespace std;
 
@@ -8,15 +11,15 @@ size_t detectLength(ifstream& fin)
 {
 	size_t n = 0;
 	char buf[255];
-	if (!fin) { throw 2; }
-	if (fin.eof()) { throw 3; }
+	if (!fin) { throw invalid_argument("Couldn't open input file."); }
+	if (fin.eof()) { throw invalid_argument("Input file is empty."); }
 	while (fin.getline(buf, 255))
 	{
 		n++;
 	}
 	fin.clear(fin.rdstate() & !fin.eofbit);
 	fin.seekg(0, ios::beg);
-	return n / 6;
+	return n / PATIENT_STRINGS_AMOUNT;
 }
 
 Patient* input(size_t& n)
@@ -30,11 +33,10 @@ Patient* input(size_t& n)
 	case 1:
 		{
 			ifstream fin("Patients.txt");
-			if (!fin) { throw 2; }
-			if (fin.eof()) { throw 3; }
+			if (!fin) { throw invalid_argument("Couldn't open input file."); }
+			if (fin.eof()) { throw invalid_argument("Input file is empty."); }
 			n = detectLength(fin);
 			patArray = new Patient[n];
-			if (!patArray) { throw 1; }
 			for (size_t i = 0; i < n; i++)
 			{
 				fin >> patArray[i];
@@ -46,7 +48,6 @@ Patient* input(size_t& n)
 			cout << "Enter number of patients.\n";
 			cin >> n;
 			patArray = new Patient[n];
-			if (!patArray) { throw 1; }
 			for (size_t i = 0; i < n; i++)
 			{
 				cout << "Enter patients' data. Each parameter must be entered on a different string.\n";
@@ -56,7 +57,7 @@ Patient* input(size_t& n)
 		}
 	default:
 		{
-			throw 5;
+			throw invalid_argument("Incorrect input.");
 		}
 	}
 	return patArray;
@@ -64,7 +65,7 @@ Patient* input(size_t& n)
 
 size_t* findByDiagnosis(Patient* patArray, size_t n, char* diagnosis)
 {
-	if (!diagnosis) { throw 5; }
+	if (!diagnosis) { throw invalid_argument("Incorrect input."); }
 	size_t* indexArr = new size_t[n];
 	for (size_t i = 0; i < n; i++)
 	{
@@ -85,7 +86,7 @@ size_t* findByDiagnosis(Patient* patArray, size_t n, char* diagnosis)
 
 size_t* findByNo(Patient* patArray, size_t n, int smallerNo, int biggerNo)
 {
-	if (smallerNo > biggerNo) { throw 5; }
+	if (smallerNo > biggerNo) { throw invalid_argument("Incorrect input."); }
 	size_t* indexArr = new size_t[n];
 	for (size_t i = 0; i < n; i++)
 	{
@@ -150,40 +151,14 @@ int main()
 			cout << "Patients with these card numbers were not found.\n";
 		}
 	}
-	catch (int errCode)
-	{
-		switch(errCode)
-		{
-		case 1:
-			{
-				cout << "Allocation error.\n";
-				break;
-			}
-		case 2:
-			{
-				cout << "Couldn't open input file.\n";
-				break;
-			}
-		case 3:
-			{
-				cout << "Input file is empty.\n";
-				break;
-			}
-		case 4:
-			{
-				cout << "Couldn't open output file.\n";
-				break;
-			}
-		case 5:
-			{
-				cout << "Incorrect input.\n";
-				break;
-			}
-		default:
-			{
-				cout << "Unhandled exception.\n";
-			}
-		}
+	catch (invalid_argument ia) {
+		cout << ia.what() << endl;
+	}
+	catch (bad_alloc ba) {
+		cout << ba.what() << endl;
+	}
+	catch (...) {
+		cout << "Unhandled exception.\n";
 	}
 	delete[] patArray;
 	delete[] foundDiag;

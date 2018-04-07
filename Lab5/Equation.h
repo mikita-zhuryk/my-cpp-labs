@@ -3,6 +3,10 @@
 
 using namespace std;
 
+struct bad_stream {};
+
+struct bad_input {};
+
 class Equation {
 
 public:

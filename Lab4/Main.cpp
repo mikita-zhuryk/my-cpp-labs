@@ -7,7 +7,7 @@ struct incorrect_input {};
 
 int menu()
 {
-	Queue q;						//TODO: Add Elem->Delete Elem->Show State->CRASH
+	Queue q;
 	bool loop = true;
 	int option = -1;
 	while (loop) {
@@ -32,7 +32,7 @@ int menu()
 			int flat;
 			cout << "Enter flat.\n";
 			cin >> flat;
-			q.addElem(temp, house, building, flat);
+			q.addElem(Address(temp, house, building, flat));
 			break;
 		}
 		case 3: {
