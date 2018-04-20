@@ -1,5 +1,6 @@
 #include "..\Lab4\Queue.h"
 #include <iostream>
+#pragma warning(disable: 4996)
 
 using namespace std;
 
@@ -25,14 +26,21 @@ int menu()
 			cin.getline(temp, 255);
 			int house;
 			cout << "Enter house.\n";
-			cin >> house;
+			if (!(cin >> house)) {
+				throw invalid_argument("Incorrect input");
+			}
 			int building;
 			cout << "Enter building.\n";
-			cin >> building;
+			if (!(cin >> building)) {
+				throw invalid_argument("Incorrect input");
+			}
 			int flat;
 			cout << "Enter flat.\n";
-			cin >> flat;
-			q.addElem(Address(temp, house, building, flat));
+			if (!(cin >> flat)) {
+				throw invalid_argument("Incorrect input");
+			}
+			Address tempA(temp, house, building, flat);
+			q.addElem(tempA);
 			break;
 		}
 		case 3: {
@@ -63,6 +71,9 @@ int main() {
 	catch (incorrect_input err)
 	{
 		cout << "Incorrect input.\n";
+	}
+	catch (invalid_argument ia) {
+		cout << ia.what() << endl;
 	}
 	system("pause");
 	return 0;

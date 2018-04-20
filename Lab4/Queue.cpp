@@ -1,6 +1,7 @@
 #include "..\Lab4\Queue.h"
 #include <cstring>
 #include <iostream>
+#pragma warning(disable: 4996)
 
 using namespace std;
 
@@ -108,7 +109,8 @@ Address::Address(const char* street, int house, int building, int flat) {
 	int length = strlen(street);
 	this->street = new char[length + 1];
 	this->street[length] = '\0';
-	strcpy_s(this->street, length, street);
+	//strcpy_s(this->street, length, street);
+	strcpy(this->street, street);
 	this->building = building;
 	this->flat = flat;
 	this->house = house;
@@ -116,11 +118,24 @@ Address::Address(const char* street, int house, int building, int flat) {
 
 Address::Address(const Address& origObj) {
 	int length = strlen(origObj.street);
-	street = new char[length];
-	strcpy_s(street, length, origObj.street);
+	street = new char[length + 1];
+	this->street[length] = '\0';
+	//strcpy_s(street, length, origObj.street);
+	strcpy(street, origObj.street);
 	building = origObj.building;
 	flat = origObj.flat;
 	house = origObj.house;
+}
+
+Address& Address::operator=(const Address& origObj) {
+	int length = strlen(origObj.street);
+	street = new char[length + 1];
+	street[length] = '\0';
+	strcpy(street, origObj.street);
+	house = origObj.house;
+	building = origObj.building;
+	flat = origObj.flat;
+	return *this;
 }
 
 Address::~Address() {

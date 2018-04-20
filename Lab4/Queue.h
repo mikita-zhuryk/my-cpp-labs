@@ -1,7 +1,5 @@
 #pragma once
 
-//TODO: Add struct House containing street, house, ...
-
 #define STRING_SIZE 30
 
 struct Address {
@@ -15,6 +13,8 @@ struct Address {
 	Address(const char*, int, int, int);
 
 	Address(const Address&);
+
+	Address& operator=(const Address&);
 
 	~Address();
 };
