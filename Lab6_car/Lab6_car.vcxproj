@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{CEB3EDCF-5074-4A63-94CB-9F2617B46653}</ProjectGuid>
-    <RootNamespace>Lab6</RootNamespace>
+    <ProjectGuid>{47CD1541-363B-407D-A38E-8A38484948B7}</ProjectGuid>
+    <RootNamespace>Lab6car</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,14 +115,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="C++.h" />
-    <ClInclude Include="C.h" />
-    <ClInclude Include="CSharp.h" />
-    <ClInclude Include="Pascal.h" />
-    <ClInclude Include="ProgLang.h" />
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="MV_Train.h" />
+    <ClInclude Include="Pickup.h" />
+    <ClInclude Include="Sportcar.h" />
+    <ClInclude Include="Truck.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ProgLang.cpp" />
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="MV_Train.cpp" />
+    <ClCompile Include="Pickup.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Sportcar.cpp" />
+    <ClCompile Include="Truck.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

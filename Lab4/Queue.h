@@ -31,10 +31,6 @@ class Queue {
 		QueueNode(const QueueNode&);
 
 		~QueueNode();
-
-		/*friend ostream& operator<<(ostream& out, const QueueNode& obj) {
-			out << obj.street << ", " << obj.house << ", " << obj.building << ", " << obj.flat << ".\n";
-		}*/
 	};
 
 	QueueNode* head;
@@ -45,20 +41,18 @@ public:
 
 	Queue();
 
-	//Queue(const char* = "\0", int = 0, int = 0, int = 0);
-
 	Queue(Address);
 
 	Queue(const Queue&);
 
 	~Queue();
 
-	bool isEmpty();
+	bool empty();
 
-	void showState();
+	void show();
 
-	void addElem(Address);
+	void add(Address);
 
-	QueueNode popElem();
+	QueueNode pop();
 
 };

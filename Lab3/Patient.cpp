@@ -94,10 +94,7 @@ char* Patient::getMiddleName()
 
 char* Patient::getAddress()
 {
-	char* temp = new char[50];
-	if (!temp) { throw 1; }
-	strcpy_s(temp, 50, address);
-	return temp;
+	return address;
 }
 
 int Patient::getCardNo()
@@ -115,12 +112,14 @@ char* Patient::getDiagnosis()
 
 Patient& Patient::operator=(const Patient& origin)
 {
-	strcpy_s(surname, origin.surname);
-	strcpy_s(forename, origin.forename);
-	strcpy_s(middleName, origin.middleName);
-	strcpy_s(address, origin.address);
-	medCardNo = origin.medCardNo;
-	strcpy_s(diagnosis, origin.diagnosis);
+	if (this != &origin) {
+		strcpy_s(surname, origin.surname);
+		strcpy_s(forename, origin.forename);
+		strcpy_s(middleName, origin.middleName);
+		strcpy_s(address, origin.address);
+		medCardNo = origin.medCardNo;
+		strcpy_s(diagnosis, origin.diagnosis);
+	}
 	return *this;
 }
 

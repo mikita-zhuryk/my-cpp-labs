@@ -6,37 +6,37 @@ IntList::IntListNode::IntListNode(int data) {
 }
 
 IntList::IntList() {
-	head = tail = nullptr;
+	head = nullptr;
 }
 
 IntList::IntList(int data) {
 	IntListNode* temp = new IntListNode(data);
-	head = tail = temp;
+	head = temp;
 }
 
 IntList::IntList(int* arr, int length) {
 	if (!arr || !length) {
 		throw invalid_argument("Array is corrupted.\n");
 	}
-	IntListNode* temp = new IntListNode(arr[0]);
-	head = tail = temp;
+	IntListNode* tempInsert = new IntListNode(arr[0]);
+	tempInsert->next = nullptr;
+	head = tempInsert;
 	for (int i = 1; i < length; i++) {
-		temp = new IntListNode(arr[i]);
-		tail->next = temp;
-		tail = temp;
+		tempInsert->next = new IntListNode(arr[i]);
+		tempInsert = tempInsert->next;
 	}
 }
 
 IntList::IntList(const IntList& origin) {
-	if (!origin.isEmpty()) {
+	if (!origin.empty()) {
 		IntListNode* temp = origin.head;
-		head = new IntListNode(temp->data_);
+		IntListNode* tempInsert = new IntListNode(temp->data_);
 		temp = temp->next;
-		while (temp != origin.tail) {
-			IntListNode* create = new IntListNode(temp->data_);
-			tail->next = create;
-			tail = create;
+		head = tempInsert;
+		while (temp) {
+			tempInsert->next = new IntListNode(temp->data_);
 			temp = temp->next;
+			tempInsert = tempInsert->next;
 		}
 	}
 	else {
@@ -53,7 +53,7 @@ IntList::~IntList() {
 	}
 }
 
-bool IntList::isEmpty() const
+bool IntList::empty() const
 {
 	return !head;
 }

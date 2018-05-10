@@ -6,37 +6,37 @@ DoubleList::DoubleListNode::DoubleListNode(double data) {
 }
 
 DoubleList::DoubleList() {
-	head = tail = nullptr;
+	head = nullptr;
 }
 
 DoubleList::DoubleList(double data) {
 	DoubleListNode* temp = new DoubleListNode(data);
-	head = tail = temp;
+	head = temp;
 }
 
 DoubleList::DoubleList(double* arr, double length) {
 	if (!arr || !length) {
 		throw invalid_argument("Array is corrupted.\n");
 	}
-	DoubleListNode* temp = new DoubleListNode(arr[0]);
-	head = tail = temp;
+	DoubleListNode* tempInsert = new DoubleListNode(arr[0]);
+	tempInsert->next = nullptr;
+	head = tempInsert;
 	for (int i = 1; i < length; i++) {
-		temp = new DoubleListNode(arr[i]);
-		tail->next = temp;
-		tail = temp;
+		tempInsert->next = new DoubleListNode(arr[i]);
+		tempInsert = tempInsert->next;
 	}
 }
 
 DoubleList::DoubleList(const DoubleList& origin) {
-	if (!origin.isEmpty()) {
+	if (!origin.empty()) {
 		DoubleListNode* temp = origin.head;
-		head = new DoubleListNode(temp->data_);
+		DoubleListNode* tempInsert = new DoubleListNode(temp->data_);
 		temp = temp->next;
-		while (temp != origin.tail) {
-			DoubleListNode* create = new DoubleListNode(temp->data_);
-			tail->next = create;
-			tail = create;
+		head = tempInsert;
+		while (temp) {
+			tempInsert->next = new DoubleListNode(temp->data_);
 			temp = temp->next;
+			tempInsert = tempInsert->next;
 		}
 	}
 	else {
@@ -53,7 +53,7 @@ DoubleList::~DoubleList() {
 	}
 }
 
-bool DoubleList::isEmpty() const
+bool DoubleList::empty() const
 {
 	return !head;
 }

@@ -11,7 +11,6 @@ class DoubleList : public List {
 	};
 
 	DoubleListNode* head;
-	DoubleListNode* tail;
 
 public:
 
@@ -27,6 +26,6 @@ public:
 
 	void print(ostream&) const;
 
-	bool isEmpty() const;
+	bool empty() const;
 
 };

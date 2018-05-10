@@ -12,6 +12,6 @@ public:
 
 	virtual void print(ostream&) const = 0;
 
-	virtual bool isEmpty() const = 0;
+	virtual bool empty() const = 0;
 
 };

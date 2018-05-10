@@ -11,7 +11,6 @@ class IntList : public List {
 	};
 
 	IntListNode* head;
-	IntListNode* tail;
 
 public:
 
@@ -27,6 +26,6 @@ public:
 
 	void print(ostream&) const;
 
-	bool isEmpty() const;
+	bool empty() const;
 
 };

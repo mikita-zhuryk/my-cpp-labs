@@ -17,7 +17,7 @@ int menu()
 		cin.ignore(1);
 		switch (option) {
 		case 1: {
-			q.showState();
+			q.show();
 			break;
 		}
 		case 2: {
@@ -40,12 +40,12 @@ int menu()
 				throw invalid_argument("Incorrect input");
 			}
 			Address tempA(temp, house, building, flat);
-			q.addElem(tempA);
+			q.add(tempA);
 			break;
 		}
 		case 3: {
 			//cout << "Deleted: " << 
-			q.popElem();
+			q.pop();
 			break;
 		}
 		case 4: {

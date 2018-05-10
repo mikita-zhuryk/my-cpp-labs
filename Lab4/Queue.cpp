@@ -19,8 +19,9 @@ Queue::Queue(const Queue& origin) {
 	QueueNode* tmpPtr = origin.head;
 	head = new QueueNode(*tmpPtr);
 	tail = head;
-	for (; tmpPtr < origin.tail; tmpPtr++) {
+	while (tmpPtr) {
 		tail = new QueueNode(tmpPtr->address, tail, nullptr);
+		tmpPtr = tmpPtr->nextNode;
 	}
 }
 
@@ -49,12 +50,12 @@ Queue::QueueNode::QueueNode(const QueueNode& origObj) {
 Queue::QueueNode::~QueueNode() {
 }
 
-bool Queue::isEmpty() {
+bool Queue::empty() {
 	return (!head);
 }
 
-void Queue::showState() {
-	if (isEmpty()) { cout << "Queue is empty.\n"; }
+void Queue::show() {
+	if (empty()) { cout << "Queue is empty.\n"; }
 	else {
 		QueueNode* tmpPtr = head;
 		size_t count = 0;
@@ -68,8 +69,8 @@ void Queue::showState() {
 	}
 }
 
-void Queue::addElem(Address address) {
-	if (isEmpty()) {
+void Queue::add(Address address) {
+	if (empty()) {
 		head = new QueueNode(address, tail);
 		tail = head;
 	}
@@ -80,8 +81,8 @@ void Queue::addElem(Address address) {
 	}
 }
 
-Queue::QueueNode Queue::popElem() {
-	if (isEmpty()) { 
+Queue::QueueNode Queue::pop() {
+	if (empty()) { 
 		cout << "Error. Queue is empty, nothing to delete.\n";
 		return QueueNode(Address("\0", 0, 0, 0), 0, 0);
 	}
